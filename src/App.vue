@@ -1,28 +1,23 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <home></home>
+    <blur-filter></blur-filter>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+
+  import EventBus from './eventBus.js'
+
+// Imported Views
+import Home from "./components/Home.vue";
+import BlurFilter from "./components/BlurFilter.vue";
 
 export default {
   name: "app",
   components: {
-    HelloWorld
+    "home": Home,
+    'blur-filter': BlurFilter
   }
 };
 </script>
-
-<style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
