@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const { GaussianBlur } = require('filterlib'); // Here it is :^)
+const { GaussianBlur, OilFilter } = require('filterlib'); // Here it is :^)
 
 let previousPath = __dirname.split('/');
 previousPath.pop();
@@ -39,6 +39,34 @@ app.post("/blurFilter", upload.single('file'), (req, res) => {
     const ouputFileName = data.image.output.split('/').pop();
 
     (new GaussianBlur(data))
+      .then(() => { console.log(file.originalname); res.json(`/uploads/images/${ouputFileName}`); });
+  }
+  else throw 'error';
+});
+
+app.post("/oilFilter", upload.single('file'), (req, res) => {
+  if(req.file) {
+    let file = req.file;
+
+    let data = {
+      image: {
+        input: "",
+        output: ""
+      },
+      options: {
+        radius: 0,
+        sigma: 0
+      }
+    };
+
+    data.image.input = file.path;
+    data.image.output = file.path + '-oil.jpg';
+    data.options.radius = req.body.radius;
+    data.options.sigma = req.body.sigma;
+
+    const ouputFileName = data.image.output.split('/').pop();
+
+    (new OilFilter(data))
       .then(() => { console.log(file.originalname); res.json(`/uploads/images/${ouputFileName}`); });
   }
   else throw 'error';

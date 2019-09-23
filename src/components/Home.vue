@@ -11,9 +11,12 @@
                         <h3 class="handlerSubText">Blur Filter</h3>
                     </el-card>
                 </el-col>
-                <!--<el-col :span="6">asdf</el-col>-->
-                <!--<el-col :span="6">asdf</el-col>-->
-                <!--<el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
+                <el-col :span="12" class="">
+                    <el-card>
+                        <a @click="handleFilterClick"><img id="OilFilter" class="handlerImage" :src="require('../assets/oil.jpg')" alt="oilFilter"></a>
+                        <h3 class="handlerSubText">Oil Filter</h3>
+                    </el-card>
+                </el-col>
             </el-row>
 
         </el-card>

@@ -1,34 +1,34 @@
 <template>
-    <div v-if="show" class="home blurFilter">
+    <div v-if="show" class="home oilFilter">
         <el-card v-loading="loading">
-            <el-page-header @back="goBack" content="Blur Filter">
+            <el-page-header @back="goBack" content="Oil Filter">
             </el-page-header>
 
             <el-upload
-            class="upload-demo"
-            drag
-            action="http://127.0.0.1:8081/blurFilter"
-            ref="blurUpload"
-            :auto-upload="false"
-            :file-list="fileList"
-            :data="{radius: blurOptions.radius, sigma: blurOptions.sigma }"
-            :on-success="handleSuccess"
-            multiple>
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
-            <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
+                    class="upload-demo"
+                    drag
+                    action="http://127.0.0.1:8081/oilFilter"
+                    ref="oilUpload"
+                    :auto-upload="false"
+                    :file-list="fileList"
+                    :data="{radius: oilOptions.radius, sigma: oilOptions.sigma }"
+                    :on-success="handleSuccess"
+                    multiple>
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
+                <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
             </el-upload>
 
             <hr>
 
             <div class="filterOptions">
                 <div class="block">
-                    <span class="demonstration">Blur Radius</span>
-                    <el-slider v-model="blurOptions.radius"></el-slider>
+                    <span class="demonstration">Oil Radius</span>
+                    <el-slider v-model="oilOptions.radius"></el-slider>
                 </div>
                 <div class="block">
-                    <span class="demonstration">Blur Sigma</span>
-                    <el-slider v-model="blurOptions.sigma"></el-slider>
+                    <span class="demonstration">Oil Sigma</span>
+                    <el-slider v-model="oilOptions.sigma"></el-slider>
                 </div>
             </div>
 
@@ -38,17 +38,17 @@
 </template>
 
 <script>
-    import EventBus from '../eventBus.js';
+  import EventBus from '../eventBus.js';
 
   export default {
-    name: "BlurFilter",
+    name: "OilFilter",
     data() {
       return {
         show: false,
         fileList: [],
         loading: false,
 
-        blurOptions: {
+        oilOptions: {
           radius: 0,
           sigma: 0
         }
@@ -62,7 +62,7 @@
       },
 
       submitUpload() {
-        this.$refs.blurUpload.submit();
+        this.$refs.oilUpload.submit();
         this.doLoad();
       },
 
@@ -90,13 +90,13 @@
     },
 
     mounted() {
-      EventBus.$on('showBlurFilter', () => {
+      EventBus.$on('showOilFilter', () => {
         this.show = true;
 
-        EventBus.$emit('hideOilFilter');
+        EventBus.$emit('hideBlurFilter');
       });
 
-      EventBus.$on('hideBlurFilter', () => {
+      EventBus.$on('hideOilFilter', () => {
         this.show = false;
       });
     }
@@ -108,7 +108,7 @@
         display: none;
     }
 
-    .blurFilter .upload-demo {
+    .oilFilter .upload-demo {
         margin-top: 20px;
     }
 
